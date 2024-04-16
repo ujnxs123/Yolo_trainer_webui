@@ -1,0 +1,32 @@
+[device]
+device = [ 0,]
+
+[data]
+data = "./config\\default.yaml"
+
+[train]
+model = "./weights\\segment\\yolov8n-seg.pt"
+imgsz = 640
+name = "demo"
+project = "./outputs"
+save_period = 10
+batch = -1
+epochs = 100
+patience = 100
+exist_ok = false
+
+[advanced]
+workers = 0
+nbs = 64
+lr0 = 0.01
+lrf = 0.01
+momentum = 0.937
+weight_decay = 0.0005
+close_mosaic = 10
+label_smoothing = 0.0
+overlap_mask = true
+mask_ratio = 4
+dropout = 0.0
+optimizer = "auto"
+amp = true
+cache = false
