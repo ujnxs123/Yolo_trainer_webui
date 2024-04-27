@@ -2,18 +2,18 @@
 device = [ 0,]
 
 [data]
-data = "./config\\default.yaml"
+data = "./datasets\\coco128\\coco128.yaml"
 
 [train]
-model = "./weights\\segment\\yolov8n-seg.pt"
+model = "./weights\\detection\\yolov5m6u.pt"
 imgsz = 640
 name = "demo"
-project = "./outputs"
+project = "./outputs/project"
 save_period = 10
-batch = -1
-epochs = 100
+batch = 2
+epochs = 1
 patience = 100
-exist_ok = false
+exist_ok = true
 
 [advanced]
 workers = 0

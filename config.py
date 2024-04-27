@@ -28,15 +28,20 @@ SOURCES_LIST = ["Image", "Video", "Webcam"]
 DETECTION_MODEL_DIR = ROOT / 'weights' / 'detection'
 SEGMENT_MODEL_DIR = ROOT / 'weights' / 'segment'
 POSE_MODEL_DIR = ROOT / 'weights' / 'pose'
+OUTPUTS_MODEL_DIR = ROOT / 'outputs'
 
-YOLOv8n = DETECTION_MODEL_DIR / "yolov8n.pt"
-YOLOv8s = DETECTION_MODEL_DIR / "yolov8s.pt"
-YOLOv8m = DETECTION_MODEL_DIR / "yolov8m.pt"
-YOLOv8l = DETECTION_MODEL_DIR / "yolov8l.pt"
-YOLOv8x = DETECTION_MODEL_DIR / "yolov8x.pt"
-YOLOvcs2 = DETECTION_MODEL_DIR / "sbest.pt"
-YOLOvcs1 = DETECTION_MODEL_DIR / "nlast.pt"
-YOLOvcs3 = DETECTION_MODEL_DIR / "last.pt"
+MODEL_LIST = {
+    "yolov8n": DETECTION_MODEL_DIR / "yolov8n.pt",
+    "yolov8s": DETECTION_MODEL_DIR / "yolov8s.pt",
+    "yolov8m": DETECTION_MODEL_DIR / "yolov8m.pt",
+    "yolov8l": DETECTION_MODEL_DIR / "yolov8l.pt",
+    "yolov8x": DETECTION_MODEL_DIR / "yolov8x.pt",
+    "yolov5s": DETECTION_MODEL_DIR / "yolov5s.pt",
+    "yolov5m": DETECTION_MODEL_DIR / "yolov5m.pt",
+    "yolov5l": DETECTION_MODEL_DIR / "yolov5l.pt",
+    "yolov5x": DETECTION_MODEL_DIR / "yolov5x.pt",
+    "mmdetection": DETECTION_MODEL_DIR / "mmdetection.pt",
+}
 
 DETECTION_MODEL_LIST = [
     "yolov8n.pt",
@@ -44,20 +49,45 @@ DETECTION_MODEL_LIST = [
     "yolov8m.pt",
     "yolov8l.pt",
     "yolov8x.pt",
-    "nlast.pt",
-    "sbest.pt",
-    "last.pt"]
+    'yolov5n.pt',
+    "yolov5s.pt",
+    "yolov5m.pt",
+    "yolov5l.pt",
+    "yolov5x.pt",
+    'yolov5n6.pt',
+    'yolov5s6.pt',
+    'yolov5m6.pt',
+    'yolov5l6.pt',
+    'yolov5x6.pt',
+    "mmdetection.pt",
+    ]
 
 SEGMENT_MODEL_LIST = [
     "yolov8n-seg.pt",
     "yolov8s-seg.pt",
     "yolov8m-seg.pt",
     "yolov8l-seg.pt",
-    "yolov8x-seg.pt"]
+    "yolov8x-seg.pt",
+    "mmdetection-seg.pt",]
 
 POSE_MODEL_LIST = [
     "yolov8n-pose.pt",
     "yolov8s-pose.pt",
     "yolov8m-pose.pt",
     "yolov8l-pose.pt",
-    "yolov8x-pose.pt"]
+    "yolov8x-pose.pt",
+    "mmdetection-pose.pt",]
+
+# %%
+def get_relative_paths(OUTPUTS_MODEL_DIR):
+    pt_files = []
+    for root, dirs, files in os.walk(OUTPUTS_MODEL_DIR):
+        for file in files:
+            if file.endswith(".pt"):
+                pt_files.append(os.path.relpath(os.path.join(root, file), OUTPUTS_MODEL_DIR))
+    return pt_files
+
+
+#%%
+
+OUTPUTS_MODEL_LIST = get_relative_paths(OUTPUTS_MODEL_DIR)
